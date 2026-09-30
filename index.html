@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G.C.E. O/L Simultaneous Equations Practice Suite</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+            dark: {
+              base: '#080d1a',
+              card: '#111827',
+              inner: '#0b1120',
+              border: '#1f293d',
+              borderHover: '#374151',
+              input: '#0d1526'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #070c18;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    /* Custom scrollbar for dark UI */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080d1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f293d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+
+    /* Input arrow removal for clean look */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .glow-emerald {
+      box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.25);
+    }
+    .glow-red {
+      box-shadow: 0 0 20px -5px rgba(239, 68, 68, 0.25);
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 lg:p-8 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Main Responsive Container -->
+  <div class="max-w-6xl mx-auto space-y-5">
+
+    <!-- TOP HEADER BAR -->
+    <header class="bg-[#101728] border border-[#1e293d] rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+      
+      <!-- App Brand Title -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 shrink-0">
+          <!-- Calculator Icon -->
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m-6 4h6m-6 4h6M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-bold text-white tracking-tight">Simultaneous Equations Practice Questions</h1>
+        </div>
+      </div>
+
+      <!-- Stat Boxes Top Right -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 shrink-0">
+        <!-- Completed -->
+        <div class="bg-[#0b1120] border border-[#1e293d] rounded-xl px-3.5 py-2 text-center min-w-[90px]">
+          <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Completed</div>
+          <div class="text-base font-extrabold text-white mt-0.5" id="stat-completed">0 / 10</div>
+        </div>
+        <!-- Correct -->
+        <div class="bg-[#0b1120] border border-[#1e293d] rounded-xl px-3.5 py-2 text-center min-w-[80px]">
+          <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Correct</div>
+          <div class="text-base font-extrabold text-emerald-400 mt-0.5" id="stat-correct">0</div>
+        </div>
+        <!-- Incorrect -->
+        <div class="bg-[#0b1120] border border-[#1e293d] rounded-xl px-3.5 py-2 text-center min-w-[80px]">
+          <div class="text-[10px] font-bold text-rose-400 uppercase tracking-wider">Incorrect</div>
+          <div class="text-base font-extrabold text-rose-400 mt-0.5" id="stat-incorrect">0</div>
+        </div>
+        <!-- Accuracy -->
+        <div class="bg-[#0b1120] border border-[#1e293d] rounded-xl px-3.5 py-2 text-center min-w-[80px]">
+          <div class="text-[10px] font-bold text-sky-400 uppercase tracking-wider">Accuracy</div>
+          <div class="text-base font-extrabold text-sky-400 mt-0.5" id="stat-accuracy">0%</div>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- QUESTION NAVIGATION & SELECTOR BAR -->
+    <nav class="bg-[#101728] border border-[#1e293d] rounded-2xl p-3 sm:p-4 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+      
+      <!-- Prev Button -->
+      <button id="btn-prev" onclick="navigateQuestion(-1)" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-[#172238] hover:bg-[#1f2d4a] text-slate-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        <span>Previous</span>
+      </button>
+
+      <!-- Question Selector Pills -->
+      <div id="pills-container" class="flex items-center justify-center gap-1.5 flex-wrap w-full overflow-x-auto py-1">
+        <!-- Rendered dynamically via JS -->
+      </div>
+
+      <!-- Next Button -->
+      <button id="btn-next" onclick="navigateQuestion(1)" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-[#172238] hover:bg-[#1f2d4a] text-slate-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+        <span>Next</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+
+    </nav>
+
+    <!-- MAIN QUESTION CONTAINER CARD -->
+    <main class="bg-[#101728] border border-[#1e293d] rounded-2xl p-4 sm:p-6 shadow-2xl relative overflow-hidden">
+      
+      <!-- Question Header Tags -->
+      <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-[#1e293d] mb-5">
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Question Number Badge -->
+          <span id="badge-qnum" class="px-3 py-1 rounded-lg bg-brand-500 text-white font-extrabold text-xs tracking-wide">
+            Q1
+          </span>
+          <!-- Topic Tag -->
+          <span class="px-3 py-1 rounded-lg bg-[#18243b] text-slate-300 font-semibold text-xs border border-[#243350]">
+            Simultaneous Equations
+          </span>
+        </div>
+
+        <!-- Question Status Tag -->
+        <span id="badge-status" class="px-3 py-1 rounded-full bg-slate-800 text-slate-400 font-bold text-xs flex items-center gap-1.5 border border-slate-700">
+          <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+          Unanswered
+        </span>
+      </div>
+
+      <!-- Question Title -->
+      <h2 id="q-title" class="text-xl sm:text-2xl font-bold text-white mb-4">
+        School Canteen Purchase
+      </h2>
+
+      <!-- Scenario Box -->
+      <div class="bg-[#0b1120] border border-[#1e293d] rounded-xl p-4 sm:p-5 mb-6 text-slate-200 text-sm sm:text-base leading-relaxed">
+        <div id="q-scenario">
+          <!-- Scenario text injected via JS -->
+        </div>
+      </div>
+
+      <!-- Action Prompt -->
+      <p id="q-prompt" class="text-xs sm:text-sm font-semibold text-brand-400 mb-4 flex items-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>Enter the exact values to solve the system of equations:</span>
+      </p>
+
+      <!-- Dual Input Fields Grid -->
+      <form id="answers-form" onsubmit="event.preventDefault(); submitCurrentAnswer();" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        
+        <!-- Input 1 -->
+        <div class="space-y-1.5">
+          <label id="label-var1" for="input-var1" class="block text-xs font-semibold text-slate-300">
+            Cost of 1 Fish Bun (<span class="italic font-mono text-brand-400">f</span>)
+          </label>
+          <div class="relative flex items-center">
+            <span id="unit-var1" class="absolute left-3 px-2 py-0.5 rounded bg-[#18243b] text-emerald-400 font-bold text-xs border border-[#263757] select-none">
+              Rs.
+            </span>
+            <input 
+              type="number" 
+              step="any" 
+              id="input-var1" 
+              placeholder="Type your answer..." 
+              class="w-full bg-[#080d1a] border border-[#1f293d] focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl pl-14 pr-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Input 2 -->
+        <div class="space-y-1.5">
+          <label id="label-var2" for="input-var2" class="block text-xs font-semibold text-slate-300">
+            Cost of 1 Cup of Tea (<span class="italic font-mono text-brand-400">t</span>)
+          </label>
+          <div class="relative flex items-center">
+            <span id="unit-var2" class="absolute left-3 px-2 py-0.5 rounded bg-[#18243b] text-emerald-400 font-bold text-xs border border-[#263757] select-none">
+              Rs.
+            </span>
+            <input 
+              type="number" 
+              step="any" 
+              id="input-var2" 
+              placeholder="Type your answer..." 
+              class="w-full bg-[#080d1a] border border-[#1f293d] focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl pl-14 pr-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="hidden"></button>
+      </form>
+
+      <!-- Action Buttons Row -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <!-- Submit Button -->
+        <button 
+          id="btn-submit" 
+          onclick="submitCurrentAnswer()" 
+          class="px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs sm:text-sm font-bold flex items-center gap-2 transition-all shadow-lg shadow-brand-500/25 active:scale-95"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+          <span>Submit Answer</span>
+        </button>
+
+        <!-- Try Again Button -->
+        <button 
+          id="btn-retry" 
+          onclick="resetCurrentQuestion()" 
+          class="px-4 py-3 rounded-xl bg-[#172238] hover:bg-[#202e4c] text-slate-200 text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all active:scale-95 border border-[#253554]"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          <span>Try Again</span>
+        </button>
+
+        <!-- Toggle Solution Drawer Button -->
+        <button 
+          id="btn-solution" 
+          onclick="toggleSolutionDrawer()" 
+          class="px-4 py-3 rounded-xl bg-[#0f213d] hover:bg-[#162c4e] text-sky-400 text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all border border-sky-500/20 ml-auto"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <span id="solution-btn-text">Show Solution</span>
+        </button>
+      </div>
+
+      <!-- SOLUTION & FEEDBACK DRAWER -->
+      <div id="solution-drawer" class="hidden mt-6 pt-5 border-t border-[#1e293d] space-y-4">
+        
+        <!-- Result Banner -->
+        <div id="feedback-banner" class="p-4 rounded-xl flex items-start gap-3 text-sm font-medium">
+          <!-- Injected via JS -->
+        </div>
+
+        <!-- Step-by-Step Algebraic Breakdown -->
+        <div class="bg-[#080d1a] border border-[#1e293d] rounded-xl p-4 sm:p-5 space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-brand-400 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Step-by-Step Solution Guide
+          </h4>
+          <div id="solution-text" class="text-xs sm:text-sm text-slate-300 font-mono leading-relaxed space-y-2">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- FOOTER / UTILITIES BAR -->
+    <footer class="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-[#101728] border border-[#1e293d] rounded-2xl text-xs text-slate-400">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+        <span>©Kaveeja Marasinghe</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button onclick="resetAllProgress()" class="hover:text-rose-400 transition-colors flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+          Reset All Progress
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    
+    // EMBEDDED QUESTION DATA BANK (10 QUESTIONS)
+    const questionsData = [
+      {
+        id: 1,
+        title: "School Canteen Purchase",
+        scenario: "Maya and Nimal are buying tea-break snacks at the canteen. Nimal buys <strong class='text-brand-400'>3 fish buns</strong> and <strong class='text-brand-400'>2 cups of tea</strong> for <strong class='text-emerald-400'>Rs. 380</strong>. Suneth buys <strong class='text-brand-400'>5 fish buns</strong> and <strong class='text-brand-400'>4 cups of tea</strong> of the exact same kind for <strong class='text-emerald-400'>Rs. 680</strong>.",
+        var1: { label: "Cost of 1 Fish Bun (f)", name: "f", unit: "Rs.", answer: 80 },
+        var2: { label: "Cost of 1 Cup of Tea (t)", name: "t", unit: "Rs.", answer: 70 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 3f + 2t = 380</div>
+          <div class="pl-3 text-sky-300">(2) 5f + 4t = 680</div>
+          <div class="pt-2"><strong>2. Eliminate variable t:</strong> Multiply equation (1) by 2:</div>
+          <div class="pl-3 text-amber-300">(3) 6f + 4t = 760</div>
+          <div>Subtract (2) from (3):</div>
+          <div class="pl-3 text-emerald-400">(6f + 4t) - (5f + 4t) = 760 - 680  ⇒  f = 80</div>
+          <div class="pt-2"><strong>3. Substitute f = 80 into equation (1):</strong></div>
+          <div class="pl-3 text-emerald-400">3(80) + 2t = 380  ⇒  240 + 2t = 380  ⇒  2t = 140  ⇒  t = 70</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: 1 Fish Bun = Rs. 80 | 1 Cup of Tea = Rs. 70</div>
+        `
+      },
+      {
+        id: 2,
+        title: "Daily Commute Expenses",
+        scenario: "A student uses public transport to travel to school and tuition classes. In week 1, taking <strong class='text-brand-400'>4 bus trips</strong> and <strong class='text-brand-400'>2 tuk-tuk rides</strong> costs a total of <strong class='text-emerald-400'>Rs. 800</strong>. In week 2, taking <strong class='text-brand-400'>6 bus trips</strong> and <strong class='text-brand-400'>1 tuk-tuk ride</strong> costs a total of <strong class='text-emerald-400'>Rs. 700</strong>.",
+        var1: { label: "Bus trip cost (b)", name: "b", unit: "Rs.", answer: 75 },
+        var2: { label: "Tuk-tuk ride cost (t)", name: "t", unit: "Rs.", answer: 250 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 4b + 2t = 800</div>
+          <div class="pl-3 text-sky-300">(2) 6b + t = 700</div>
+          <div class="pt-2"><strong>2. Eliminate variable t:</strong> Multiply equation (2) by 2:</div>
+          <div class="pl-3 text-amber-300">(3) 12b + 2t = 1400</div>
+          <div>Subtract (1) from (3):</div>
+          <div class="pl-3 text-emerald-400">(12b + 2t) - (4b + 2t) = 1400 - 800  ⇒  8b = 600  ⇒  b = 75</div>
+          <div class="pt-2"><strong>3. Substitute b = 75 into equation (2):</strong></div>
+          <div class="pl-3 text-emerald-400">6(75) + t = 700  ⇒  450 + t = 700  ⇒  t = 250</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: Bus Trip = Rs. 75 | Tuk-tuk Ride = Rs. 250</div>
+        `
+      },
+      {
+        id: 3,
+        title: "Stationery Store Shopping",
+        scenario: "An Ordinary Level student buys <strong class='text-brand-400'>4 CR exercise books</strong> and <strong class='text-brand-400'>5 blue pens</strong> for <strong class='text-emerald-400'>Rs. 1,050</strong>. Another student buys <strong class='text-brand-400'>2 CR exercise books</strong> and <strong class='text-brand-400'>3 blue pens</strong> from the same shop for <strong class='text-emerald-400'>Rs. 550</strong>.",
+        var1: { label: "CR book price (b)", name: "b", unit: "Rs.", answer: 200 },
+        var2: { label: "Blue pen price (p)", name: "p", unit: "Rs.", answer: 50 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 4b + 5p = 1050</div>
+          <div class="pl-3 text-sky-300">(2) 2b + 3p = 550</div>
+          <div class="pt-2"><strong>2. Multiply equation (2) by 2:</strong></div>
+          <div class="pl-3 text-amber-300">(3) 4b + 6p = 1100</div>
+          <div>Subtract (1) from (3):</div>
+          <div class="pl-3 text-emerald-400">(4b + 6p) - (4b + 5p) = 1100 - 1050  ⇒  p = 50</div>
+          <div class="pt-2"><strong>3. Substitute p = 50 into equation (2):</strong></div>
+          <div class="pl-3 text-emerald-400">2b + 3(50) = 550  ⇒  2b + 150 = 550  ⇒  2b = 400  ⇒  b = 200</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: 1 CR Book = Rs. 200 | 1 Blue Pen = Rs. 50</div>
+        `
+      },
+      {
+        id: 4,
+        title: "Farm Livestock Headcount",
+        scenario: "A farmer in Anuradhapura inspects his farmyard containing only chickens (2 legs each) and goats (4 legs each). Looking at the animals, he counts a total of <strong class='text-brand-400'>40 heads</strong> and <strong class='text-emerald-400'>110 legs</strong>.",
+        var1: { label: "Number of chickens (c)", name: "c", unit: "Chickens", answer: 25 },
+        var2: { label: "Number of goats (g)", name: "g", unit: "Goats", answer: 15 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) c + g = 40  (Heads)</div>
+          <div class="pl-3 text-sky-300">(2) 2c + 4g = 110  (Legs)</div>
+          <div class="pt-2"><strong>2. Multiply equation (1) by 2:</strong></div>
+          <div class="pl-3 text-amber-300">(3) 2c + 2g = 80</div>
+          <div>Subtract (3) from (2):</div>
+          <div class="pl-3 text-emerald-400">(2c + 4g) - (2c + 2g) = 110 - 80  ⇒  2g = 30  ⇒  g = 15</div>
+          <div class="pt-2"><strong>3. Substitute g = 15 into equation (1):</strong></div>
+          <div class="pl-3 text-emerald-400">c + 15 = 40  ⇒  c = 25</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: 25 Chickens | 15 Goats</div>
+        `
+      },
+      {
+        id: 5,
+        title: "Coconut Plantation Harvest",
+        scenario: "A coconut grower packs his harvested coconuts into small sacks and large sacks. Packing <strong class='text-brand-400'>3 small sacks</strong> and <strong class='text-brand-400'>2 large sacks</strong> holds <strong class='text-emerald-400'>130 coconuts</strong> in total. Packing <strong class='text-brand-400'>5 small sacks</strong> and <strong class='text-brand-400'>4 large sacks</strong> holds <strong class='text-emerald-400'>240 coconuts</strong> in total.",
+        var1: { label: "Small sack capacity (s)", name: "s", unit: "Coconuts", answer: 20 },
+        var2: { label: "Large sack capacity (l)", name: "l", unit: "Coconuts", answer: 35 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 3s + 2l = 130</div>
+          <div class="pl-3 text-sky-300">(2) 5s + 4l = 240</div>
+          <div class="pt-2"><strong>2. Multiply equation (1) by 2:</strong></div>
+          <div class="pl-3 text-amber-300">(3) 6s + 4l = 260</div>
+          <div>Subtract (2) from (3):</div>
+          <div class="pl-3 text-emerald-400">(6s + 4l) - (5s + 4l) = 260 - 240  ⇒  s = 20</div>
+          <div class="pt-2"><strong>3. Substitute s = 20 into equation (1):</strong></div>
+          <div class="pl-3 text-emerald-400">3(20) + 2l = 130  ⇒  60 + 2l = 130  ⇒  2l = 70  ⇒  l = 35</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: Small Sack = 20 Coconuts | Large Sack = 35 Coconuts</div>
+        `
+      },
+      {
+        id: 6,
+        title: "School Concert Ticket Sales",
+        scenario: "For an O/L fundraising concert, <strong class='text-brand-400'>5 adult tickets</strong> and <strong class='text-brand-400'>3 student tickets</strong> cost <strong class='text-emerald-400'>Rs. 3,100</strong> in total. Meanwhile, <strong class='text-brand-400'>2 adult tickets</strong> and <strong class='text-brand-400'>4 student tickets</strong> cost <strong class='text-emerald-400'>Rs. 1,800</strong>.",
+        var1: { label: "Adult ticket price (a)", name: "a", unit: "Rs.", answer: 500 },
+        var2: { label: "Student ticket price (s)", name: "s", unit: "Rs.", answer: 200 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 5a + 3s = 3100</div>
+          <div class="pl-3 text-sky-300">(2) 2a + 4s = 1800</div>
+          <div class="pt-2"><strong>2. Simplify equation (2) by dividing by 2:</strong></div>
+          <div class="pl-3 text-amber-300">a + 2s = 900  ⇒  a = 900 - 2s</div>
+          <div class="pt-2"><strong>3. Substitute a into equation (1):</strong></div>
+          <div class="pl-3 text-emerald-400">5(900 - 2s) + 3s = 3100  ⇒  4500 - 10s + 3s = 3100  ⇒  7s = 1400  ⇒  s = 200</div>
+          <div class="pt-2"><strong>4. Calculate a:</strong></div>
+          <div class="pl-3 text-emerald-400">a = 900 - 2(200) = 500</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: Adult Ticket = Rs. 500 | Student Ticket = Rs. 200</div>
+        `
+      },
+      {
+        id: 7,
+        title: "Mobile Phone Reload Cards",
+        scenario: "Kasun reloads his phone using voice packages and data packages. In one month, purchasing <strong class='text-brand-400'>3 voice packages</strong> and <strong class='text-brand-400'>2 data packages</strong> costs <strong class='text-emerald-400'>Rs. 1,200</strong>. In the following month, purchasing <strong class='text-brand-400'>1 voice package</strong> and <strong class='text-brand-400'>4 data packages</strong> costs <strong class='text-emerald-400'>Rs. 1,900</strong>.",
+        var1: { label: "Voice package price (v)", name: "v", unit: "Rs.", answer: 100 },
+        var2: { label: "Data package price (d)", name: "d", unit: "Rs.", answer: 450 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 3v + 2d = 1200</div>
+          <div class="pl-3 text-sky-300">(2) v + 4d = 1900  ⇒  v = 1900 - 4d</div>
+          <div class="pt-2"><strong>2. Substitute v into equation (1):</strong></div>
+          <div class="pl-3 text-emerald-400">3(1900 - 4d) + 2d = 1200  ⇒  5700 - 12d + 2d = 1200  ⇒  10d = 4500  ⇒  d = 450</div>
+          <div class="pt-2"><strong>3. Calculate v:</strong></div>
+          <div class="pl-3 text-emerald-400">v = 1900 - 4(450) = 1900 - 1800 = 100</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: Voice Package = Rs. 100 | Data Package = Rs. 450</div>
+        `
+      },
+      {
+        id: 8,
+        title: "Sports Equipment Orders",
+        scenario: "A sports master orders equipment for the school cricket team. Buying <strong class='text-brand-400'>2 leather cricket balls</strong> and <strong class='text-brand-400'>6 tennis balls</strong> costs <strong class='text-emerald-400'>Rs. 4,200</strong>. Buying <strong class='text-brand-400'>5 leather cricket balls</strong> and <strong class='text-brand-400'>3 tennis balls</strong> from the same supplier costs <strong class='text-emerald-400'>Rs. 8,100</strong>.",
+        var1: { label: "Leather cricket ball price (c)", name: "c", unit: "Rs.", answer: 1500 },
+        var2: { label: "Tennis ball price (t)", name: "t", unit: "Rs.", answer: 200 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 2c + 6t = 4200  ⇒  c + 3t = 2100</div>
+          <div class="pl-3 text-sky-300">(2) 5c + 3t = 8100</div>
+          <div class="pt-2"><strong>2. Subtract (c + 3t = 2100) from (2):</strong></div>
+          <div class="pl-3 text-emerald-400">(5c + 3t) - (c + 3t) = 8100 - 2100  ⇒  4c = 6000  ⇒  c = 1500</div>
+          <div class="pt-2"><strong>3. Substitute c = 1500 into (c + 3t = 2100):</strong></div>
+          <div class="pl-3 text-emerald-400">1500 + 3t = 2100  ⇒  3t = 600  ⇒  t = 200</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: Leather Cricket Ball = Rs. 1,500 | Tennis Ball = Rs. 200</div>
+        `
+      },
+      {
+        id: 9,
+        title: "Plumbing Service Charges",
+        scenario: "An electrician / plumber charges a standard fixed visiting fee plus a constant hourly labor rate. A repair job lasting <strong class='text-brand-400'>2 hours</strong> costs a total of <strong class='text-emerald-400'>Rs. 2,800</strong>. Another repair job lasting <strong class='text-brand-400'>5 hours</strong> costs a total of <strong class='text-emerald-400'>Rs. 5,500</strong>.",
+        var1: { label: "Fixed visiting fee (f)", name: "f", unit: "Rs.", answer: 1000 },
+        var2: { label: "Hourly labor rate (h)", name: "h", unit: "Rs./hr", answer: 900 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) f + 2h = 2800</div>
+          <div class="pl-3 text-sky-300">(2) f + 5h = 5500</div>
+          <div class="pt-2"><strong>2. Subtract equation (1) from (2):</strong></div>
+          <div class="pl-3 text-emerald-400">(f + 5h) - (f + 2h) = 5500 - 2800  ⇒  3h = 2700  ⇒  h = 900</div>
+          <div class="pt-2"><strong>3. Substitute h = 900 into equation (1):</strong></div>
+          <div class="pl-3 text-emerald-400">f + 2(900) = 2800  ⇒  f + 1800 = 2800  ⇒  f = 1000</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: Call-out Fee = Rs. 1,000 | Labor Rate = Rs. 900/hr</div>
+        `
+      },
+      {
+        id: 10,
+        title: "Term Exam Scoring Scheme",
+        scenario: "An O/L revision quiz has two sections: Short questions (Section A) and Long questions (Section B). Amali answers <strong class='text-brand-400'>8 Short questions</strong> and <strong class='text-brand-400'>3 Long questions</strong> correctly, scoring <strong class='text-emerald-400'>56 marks</strong>. Ruwan answers <strong class='text-brand-400'>5 Short questions</strong> and <strong class='text-brand-400'>6 Long questions</strong> correctly, scoring <strong class='text-emerald-400'>68 marks</strong>.",
+        var1: { label: "Marks per Short question (x)", name: "x", unit: "Marks", answer: 4 },
+        var2: { label: "Marks per Long question (y)", name: "y", unit: "Marks", answer: 8 },
+        solution: `
+          <div><strong>1. Formulate the equations:</strong></div>
+          <div class="pl-3 text-sky-300">(1) 8x + 3y = 56</div>
+          <div class="pl-3 text-sky-300">(2) 5x + 6y = 68</div>
+          <div class="pt-2"><strong>2. Multiply equation (1) by 2:</strong></div>
+          <div class="pl-3 text-amber-300">(3) 16x + 6y = 112</div>
+          <div>Subtract (2) from (3):</div>
+          <div class="pl-3 text-emerald-400">(16x + 6y) - (5x + 6y) = 112 - 68  ⇒  11x = 44  ⇒  x = 4</div>
+          <div class="pt-2"><strong>3. Substitute x = 4 into equation (1):</strong></div>
+          <div class="pl-3 text-emerald-400">8(4) + 3y = 56  ⇒  32 + 3y = 56  ⇒  3y = 24  ⇒  y = 8</div>
+          <div class="pt-2 text-brand-400 font-bold">Result: Short Question = 4 Marks | Long Question = 8 Marks</div>
+        `
+      }
+    ];
+
+
+    // STATE VARIABLES
+    let currentQuestionIndex = 0;
+    // userAnswers stores: { [qId]: { val1: '', val2: '', status: 'unanswered' | 'correct' | 'incorrect' } }
+    let userState = {};
+
+    // Initialize or load state
+    function initAppState() {
+      const saved = localStorage.getItem('ol_sim_eq_state');
+      if (saved) {
+        try {
+          userState = JSON.parse(saved);
+        } catch(e) {
+          userState = {};
+        }
+      }
+      
+      // Ensure all questions have state entry
+      questionsData.forEach(q => {
+        if (!userState[q.id]) {
+          userState[q.id] = { val1: '', val2: '', status: 'unanswered' };
+        }
+      });
+
+      renderNavigationPills();
+      loadQuestion(0);
+      updateOverallStats();
+    }
+
+    function saveAppState() {
+      localStorage.setItem('ol_sim_eq_state', JSON.stringify(userState));
+    }
+
+    // RENDER NAVIGATION PILLS
+    function renderNavigationPills() {
+      const container = document.getElementById('pills-container');
+      container.innerHTML = '';
+
+      questionsData.forEach((q, idx) => {
+        const state = userState[q.id] || { status: 'unanswered' };
+        const isCurrent = idx === currentQuestionIndex;
+
+        let pillClass = "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border flex items-center gap-1 cursor-pointer ";
+        
+        if (isCurrent) {
+          pillClass += "ring-2 ring-brand-400 ring-offset-2 ring-offset-[#101728] ";
+        }
+
+        if (state.status === 'correct') {
+          pillClass += "bg-emerald-950/80 text-emerald-400 border-emerald-500/50 hover:bg-emerald-900";
+        } else if (state.status === 'incorrect') {
+          pillClass += "bg-rose-950/80 text-rose-300 border-rose-500/50 hover:bg-rose-900";
+        } else {
+          pillClass += "bg-[#172238] text-slate-300 border-[#243350] hover:bg-[#202f4d]";
+        }
+
+        const pill = document.createElement('button');
+        pill.className = pillClass;
+        pill.onclick = () => loadQuestion(idx);
+
+        let icon = `<span class="w-1.5 h-1.5 rounded-full ${state.status === 'correct' ? 'bg-emerald-400' : state.status === 'incorrect' ? 'bg-rose-400' : 'bg-slate-400'}"></span>`;
+
+        pill.innerHTML = `${icon} Q${q.id}`;
+        container.appendChild(pill);
+      });
+
+      // Update Prev / Next button state
+      document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+      document.getElementById('btn-next').disabled = currentQuestionIndex === questionsData.length - 1;
+    }
+
+    // LOAD A SPECIFIC QUESTION INTO UI
+    function loadQuestion(index) {
+      currentQuestionIndex = index;
+      const q = questionsData[index];
+      const state = userState[q.id];
+
+      // Update tags & titles
+      document.getElementById('badge-qnum').innerText = `Q${q.id}`;
+      document.getElementById('q-title').innerText = q.title;
+      document.getElementById('q-scenario').innerHTML = q.scenario;
+
+      // Update Labels & Units
+      document.getElementById('label-var1').innerHTML = `${q.var1.label}`;
+      document.getElementById('unit-var1').innerText = q.var1.unit;
+      
+      document.getElementById('label-var2').innerHTML = `${q.var2.label}`;
+      document.getElementById('unit-var2').innerText = q.var2.unit;
+
+      // Fill Inputs
+      const input1 = document.getElementById('input-var1');
+      const input2 = document.getElementById('input-var2');
+
+      input1.value = state.val1 !== undefined ? state.val1 : '';
+      input2.value = state.val2 !== undefined ? state.val2 : '';
+
+      // Update Status Badge
+      const statusBadge = document.getElementById('badge-status');
+      if (state.status === 'correct') {
+        statusBadge.className = "px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 font-bold text-xs flex items-center gap-1.5 border border-emerald-500/40";
+        statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Correct`;
+      } else if (state.status === 'incorrect') {
+        statusBadge.className = "px-3 py-1 rounded-full bg-rose-950 text-rose-300 font-bold text-xs flex items-center gap-1.5 border border-rose-500/40";
+        statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-400"></span> Incorrect`;
+      } else {
+        statusBadge.className = "px-3 py-1 rounded-full bg-slate-800 text-slate-400 font-bold text-xs flex items-center gap-1.5 border border-slate-700";
+        statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-slate-400"></span> Unanswered`;
+      }
+
+      // Solution Drawer
+      const solutionDrawer = document.getElementById('solution-drawer');
+      const solutionBtnText = document.getElementById('solution-btn-text');
+      
+      document.getElementById('solution-text').innerHTML = q.solution;
+
+      if (state.status !== 'unanswered') {
+        solutionDrawer.classList.remove('hidden');
+        solutionBtnText.innerText = "Hide Solution";
+        renderFeedbackBanner(state.status, q);
+      } else {
+        solutionDrawer.classList.add('hidden');
+        solutionBtnText.innerText = "Show Solution";
+      }
+
+      renderNavigationPills();
+    }
+
+    // NAVIGATE QUESTION
+    function navigateQuestion(direction) {
+      const newIndex = currentQuestionIndex + direction;
+      if (newIndex >= 0 && newIndex < questionsData.length) {
+        loadQuestion(newIndex);
+      }
+    }
+
+    // SUBMIT ANSWER
+    function submitCurrentAnswer() {
+      const q = questionsData[currentQuestionIndex];
+      const val1Input = document.getElementById('input-var1').value.trim();
+      const val2Input = document.getElementById('input-var2').value.trim();
+
+      if (val1Input === '' || val2Input === '') {
+        showTemporaryToast("Please enter values for both fields before submitting.");
+        return;
+      }
+
+      const num1 = parseFloat(val1Input);
+      const num2 = parseFloat(val2Input);
+
+      const isVar1Correct = Math.abs(num1 - q.var1.answer) < 0.01;
+      const isVar2Correct = Math.abs(num2 - q.var2.answer) < 0.01;
+
+      const isCorrect = isVar1Correct && isVar2Correct;
+
+      userState[q.id] = {
+        val1: val1Input,
+        val2: val2Input,
+        status: isCorrect ? 'correct' : 'incorrect'
+      };
+
+      saveAppState();
+      updateOverallStats();
+      
+      // Refresh question UI to reveal feedback & solution
+      loadQuestion(currentQuestionIndex);
+    }
+
+    // RESET CURRENT QUESTION
+    function resetCurrentQuestion() {
+      const q = questionsData[currentQuestionIndex];
+      userState[q.id] = { val1: '', val2: '', status: 'unanswered' };
+      saveAppState();
+      updateOverallStats();
+      loadQuestion(currentQuestionIndex);
+    }
+
+    // TOGGLE SOLUTION DRAWER
+    function toggleSolutionDrawer() {
+      const drawer = document.getElementById('solution-drawer');
+      const btnText = document.getElementById('solution-btn-text');
+      const isHidden = drawer.classList.contains('hidden');
+
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        btnText.innerText = "Hide Solution";
+      } else {
+        drawer.classList.add('hidden');
+        btnText.innerText = "Show Solution";
+      }
+    }
+
+    // RENDER FEEDBACK BANNER
+    function renderFeedbackBanner(status, q) {
+      const banner = document.getElementById('feedback-banner');
+      if (status === 'correct') {
+        banner.className = "p-4 rounded-xl flex items-start gap-3 text-sm font-medium bg-emerald-950/80 border border-emerald-500/50 text-emerald-300";
+        banner.innerHTML = `
+          <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <div>
+            <div class="font-bold text-base text-emerald-200">Excellent! That's correct.</div>
+            <div class="text-xs text-emerald-300/80 mt-1">Both answers match the required linear equations. Study the step-by-step breakdown below.</div>
+          </div>
+        `;
+      } else {
+        banner.className = "p-4 rounded-xl flex items-start gap-3 text-sm font-medium bg-rose-950/80 border border-rose-500/50 text-rose-300";
+        banner.innerHTML = `
+          <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <div>
+            <div class="font-bold text-base text-rose-200">Not quite right.</div>
+            <div class="text-xs text-rose-300/80 mt-1">Expected answers: <strong>${q.var1.name} = ${q.var1.answer} ${q.var1.unit}</strong> and <strong>${q.var2.name} = ${q.var2.answer} ${q.var2.unit}</strong>. Review the step-by-step solution below and click "Try Again".</div>
+          </div>
+        `;
+      }
+    }
+
+    // UPDATE OVERALL STATS TOP BAR
+    function updateOverallStats() {
+      let completed = 0;
+      let correct = 0;
+      let incorrect = 0;
+
+      Object.values(userState).forEach(st => {
+        if (st.status === 'correct') {
+          completed++;
+          correct++;
+        } else if (st.status === 'incorrect') {
+          completed++;
+          incorrect++;
+        }
+      });
+
+      const accuracy = completed > 0 ? Math.round((correct / completed) * 100) : 0;
+
+      document.getElementById('stat-completed').innerText = `${completed} / ${questionsData.length}`;
+      document.getElementById('stat-correct').innerText = correct;
+      document.getElementById('stat-incorrect').innerText = incorrect;
+      document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
+    }
+
+    // RESET ALL PROGRESS
+    function resetAllProgress() {
+      if (confirm("Are you sure you want to reset all your answers and statistics?")) {
+        localStorage.removeItem('ol_sim_eq_state');
+        userState = {};
+        initAppState();
+      }
+    }
+
+    // TOAST NOTIFICATION
+    function showTemporaryToast(message) {
+      const toast = document.createElement('div');
+      toast.className = "fixed bottom-5 right-5 bg-amber-500 text-slate-950 font-bold px-4 py-2.5 rounded-xl shadow-2xl text-xs z-50 animate-bounce";
+      toast.innerText = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2500);
+    }
+
+    // INITIALIZE ON LOAD
+    window.onload = initAppState;
+  </script>
+</body>
+</html>
