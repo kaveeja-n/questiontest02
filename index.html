@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>O/L Practice Portal</title>
-  <link rel = "icon" href = "https://ibb.co/chdC0rgh">
+  <title>O/L Practice Portal - Kaveeja Marasinghe</title>
+  <link rel="icon" type="image/svg+xml" href="https://kaveeja-n.github.io/questiontest02/title.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -200,7 +200,7 @@
       z-index: 1;
     }
 
-    /* DYNAMIC GREETING HERO SECTION */
+    /* HERO SECTION */
     .hero-card {
       background: linear-gradient(135deg, rgba(13, 19, 34, 0.95) 0%, rgba(18, 26, 45, 0.95) 100%);
       border: 1px solid var(--card-border-glow);
@@ -222,7 +222,6 @@
       background: linear-gradient(90deg, var(--mint-primary), var(--cyan-accent), transparent);
     }
 
-    /* GREETING HEADER BANNER */
     .greeting-banner {
       display: flex;
       align-items: center;
@@ -282,7 +281,6 @@
       color: var(--mint-primary);
     }
 
-    /* HERO SPLIT LAYOUT */
     .hero-split {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
@@ -423,7 +421,6 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* PREVIEW CARD SIDE */
     .preview-card {
       background: #090e18;
       border: 1px solid var(--card-border);
@@ -461,90 +458,7 @@
       line-height: 1.6;
     }
 
-    /* DASHBOARD METRICS BAR */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    @media (max-width: 480px) {
-      .stats-bar {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: border-color 0.2s ease;
-    }
-
-    .stat-card:hover {
-      border-color: var(--card-border-glow);
-    }
-
-    .stat-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .stat-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    .stat-val-row {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .stat-number {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--text-main);
-      font-family: var(--font-mono);
-      line-height: 1;
-    }
-
-    .stat-sub {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 5px;
-      background: #151e30;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 14px;
-    }
-
-    .progress-fill-mint {
-      height: 100%;
-      background: var(--mint-primary);
-      box-shadow: 0 0 8px var(--mint-glow);
-    }
-
-    .progress-fill-cyan {
-      height: 100%;
-      background: var(--cyan-accent);
-      box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
-    }
-
-    /* SECTION TITLES */
+    /* SECTION TITLES & GRID */
     .section-header {
       display: flex;
       justify-content: space-between;
@@ -561,7 +475,6 @@
       gap: 10px;
     }
 
-    /* PREVIOUS QUESTION SETS GRID */
     .sets-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -655,7 +568,7 @@
       border-color: var(--mint-primary);
     }
 
-    /* STUDENT NAME MODAL */
+    /* MODAL */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -779,10 +692,8 @@
   <!-- MAIN BODY -->
   <main>
 
-    <!-- HERO SECTION WITH DYNAMIC TIME GREETING -->
+    <!-- HERO SECTION -->
     <section class="hero-card">
-
-      <!-- DYNAMIC GREETING HEADER BANNER -->
       <div class="greeting-banner">
         <div class="greeting-text-wrap">
           <div class="greeting-time-icon" id="greeting-icon">👋</div>
@@ -798,28 +709,27 @@
         </button>
       </div>
 
-      <!-- LATEST QUESTION SET CONTENT -->
       <div class="hero-split">
         <div class="hero-left">
           <div class="latest-tag-row">
             <span class="badge-latest">Latest Release</span>
-            <span class="badge-subject" id="hero-subject">Mathematics</span>
-            <span class="badge-date" id="hero-date">Uploaded: Recent</span>
+            <span class="badge-subject" id="hero-subject">Algebra</span>
+            <span class="badge-date" id="hero-date">Uploaded: October 2026</span>
           </div>
 
-          <h1 class="hero-title" id="hero-title">Simultaneous Equations Practice Questions — Set 02</h1>
+          <h1 class="hero-title" id="hero-title">Quadratic Equations Practice Questions</h1>
           <p class="hero-desc" id="hero-desc">
-            Interactive real-world system of equations practice set. Solve word problems on canteen purchases and receive instant automated feedback.
+            Master solving quadratic equations by factorization, completing the square, and applying the quadratic formula with instant feedback.
           </p>
 
           <div class="hero-meta-grid">
             <div class="meta-box">
               <div class="meta-label">Questions</div>
-              <div class="meta-val" id="hero-q-count">10 Questions</div>
+              <div class="meta-val" id="hero-q-count">12 Questions</div>
             </div>
             <div class="meta-box">
               <div class="meta-label">Est. Time</div>
-              <div class="meta-val" id="hero-time">15-20 Mins</div>
+              <div class="meta-val" id="hero-time">20 Mins</div>
             </div>
             <div class="meta-box">
               <div class="meta-label">Target Exam</div>
@@ -828,10 +738,10 @@
           </div>
 
           <div class="hero-actions">
-            <a href="https://kaveeja-n.github.io/questiontest02/01.html" target="_blank" class="btn-launch" id="hero-launch-btn">
+            <a href="quadratic.html" target="_blank" class="btn-launch" id="hero-launch-btn">
               <span>🚀</span> Launch Question Set Now
             </a>
-            <a href="#previous-sets" class="btn-secondary">
+            <a href="https://kaveeja-n.github.io/questiontest02/01.html" class="btn-secondary">
               Browse Past Sets ↓
             </a>
           </div>
@@ -841,12 +751,12 @@
           <div class="preview-card">
             <div class="preview-header">
               <span class="preview-title">Sample Question Preview</span>
-              <span class="badge-subject">Set 02</span>
+              <span class="badge-subject">Quadratic Set</span>
             </div>
             <div class="preview-code-box">
-              "Nimal buys 3 fish buns & 2 cups of tea for Rs. 380. Suneth buys 5 fish buns & 4 cups of tea for Rs. 680. Find cost of 1 bun..."
+              "Solve the quadratic equation by factorization: x² + 7x + 12 = 0"
             </div>
-            <a href="https://kaveeja-n.github.io/questiontest02/01.html" target="_blank" class="btn-secondary" style="width: 100%; justify-content: center;">
+            <a href="quadratic.html" target="_blank" class="btn-secondary" style="width: 100%; justify-content: center;">
               ↗ Open Set in Full Screen
             </a>
           </div>
@@ -881,17 +791,26 @@
 
 <script>
   // QUESTION SETS DATABASE
-  // Update the 'url' values below with your actual deployed GitHub Pages or web links!
   const QUESTION_SETS_DATABASE = [
     {
-      id: "set-02",
-      title: "Simultaneous Equations Practice Questions — Set 02",
-      subject: "Mathematics",
-      questionsCount: 10,
+      id: "quad-01",
+      title: "Quadratic Equations Practice Questions",
+      subject: "Algebra",
+      questionsCount: 12,
+      estTime: "20 Mins",
+      uploadDate: "October 2026",
+      url: "https://kaveeja-n.github.io/questiontest02/01.html",
+      description: "Master solving quadratic equations by factorization, completing the square, and using the quadratic formula."
+    },
+    {
+      id: "binomial-01",
+      title: "Binomial Expressions & Algebraic Identities",
+      subject: "Algebra",
+      questionsCount: 15,
       estTime: "15-20 Mins",
       uploadDate: "October 2026",
-      url: "https://kaveeja-n.github.io/questiontest02/",
-      description: "Interactive real-world system of equations practice set. Solve word problems on canteen purchases and receive instant automated feedback."
+      url: "binomial.html",
+      description: "Master expanding binomial squares, filling missing algebraic terms, numerical squaring shortcuts, and verifying identities."
     },
     {
       id: "set-01",
@@ -900,19 +819,9 @@
       questionsCount: 10,
       estTime: "15 Mins",
       uploadDate: "September 2026",
-      url: "https://kaveeja-n.github.io/questiontest01/", // <-- Updated URL here
+      url: "https://kaveeja-n.github.io/questiontest01/",
       description: "Foundational elimination and substitution methods with step-by-step guidance."
     },
-    {
-      id: "set-geo-01",
-      title: "Pythagoras Theorem & Trigonometry — Set 01",
-      subject: "Geometry",
-      questionsCount: 12,
-      estTime: "25 Mins",
-      uploadDate: "August 2026",
-      url: "https://kaveeja-n.github.io/pythagoras-set01/", // <-- Updated URL here
-      description: "Calculate unknown sides and angles with interactive diagrams."
-    }
   ];
 
   // DYNAMIC TIME-BASED GREETING CALCULATOR
@@ -937,7 +846,6 @@
     document.getElementById('greeting-student-name').textContent = studentName || "Student";
     document.getElementById('nav-student-name').textContent = studentName || "Student";
 
-    // Set avatar initials
     const initials = studentName ? studentName.trim().charAt(0).toUpperCase() : "S";
     document.getElementById('nav-avatar').textContent = initials;
   }
@@ -960,13 +868,12 @@
     document.getElementById('name-modal').classList.remove('active');
   }
 
-  // RENDER PAST SETS (FIXED LINK & BUTTON BEHAVIOR)
+  // RENDER PAST SETS DYNAMICALLY
   function renderPastSets() {
     const container = document.getElementById('past-sets-container');
     const pastSets = QUESTION_SETS_DATABASE.slice(1); // Exclude the latest featured set
 
     container.innerHTML = pastSets.map((item, index) => {
-      // If the URL is still empty or '#', prevent default click action or alert the user
       const isUrlValid = item.url && item.url !== '#';
       const targetAttr = isUrlValid ? 'target="_blank" rel="noopener noreferrer"' : '';
       const onClickAttr = !isUrlValid ? 'onclick="alert(\'This question set is not available yet.\'); return false;"' : '';
@@ -993,37 +900,6 @@
     }).join('');
   }
 
-  // AUTOMATIC DYNAMIC STATS CALCULATION
-  function calculateAndRenderStats() {
-    const quizHistory = JSON.parse(localStorage.getItem('ol_quiz_history')) || [];
-    const totalAvailableSets = QUESTION_SETS_DATABASE.length;
-    const completedSetsCount = quizHistory.length;
-
-    let overallAccuracy = 0;
-    if (completedSetsCount > 0) {
-      const totalCorrect = quizHistory.reduce((sum, item) => sum + item.correctCount, 0);
-      const totalQuestionsAttempted = quizHistory.reduce((sum, item) => sum + item.totalQuestions, 0);
-      overallAccuracy = totalQuestionsAttempted > 0 ? Math.round((totalCorrect / totalQuestionsAttempted) * 100) : 0;
-    }
-
-    const completedEl = document.getElementById('stat-completed-count');
-    const totalSetsEl = document.getElementById('stat-total-sets');
-    const completedBarEl = document.getElementById('stat-completed-bar');
-    
-    const accuracyEl = document.getElementById('stat-accuracy-rate');
-    const accuracyBarEl = document.getElementById('stat-accuracy-bar');
-
-    if (completedEl) completedEl.textContent = completedSetsCount;
-    if (totalSetsEl) totalSetsEl.textContent = `/ ${totalAvailableSets} Sets`;
-    if (completedBarEl) {
-      const percentCompleted = Math.round((completedSetsCount / totalAvailableSets) * 100);
-      completedBarEl.style.width = `${percentCompleted}%`;
-    }
-
-    if (accuracyEl) accuracyEl.textContent = `${overallAccuracy}%`;
-    if (accuracyBarEl) accuracyBarEl.style.width = `${overallAccuracy}%`;
-  }
-
   // INITIALIZE PAGE
   window.addEventListener('DOMContentLoaded', () => {
     const savedName = localStorage.getItem('prepsphere_student_name');
@@ -1034,7 +910,6 @@
     }
 
     renderPastSets();
-    calculateAndRenderStats();
   });
 </script>
 </body>
